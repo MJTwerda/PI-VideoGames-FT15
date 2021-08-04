@@ -28,12 +28,23 @@ router.post('/', async (req, res) => {
 router.get('/:idVideoGame', async (req, res) => {
     const { idVideoGame } = req.params;
     try {
-        let getForId = await VideoGame.findAll({
-            where: {
-                id: idVideoGame
-            }
-        });
-        res.json(getForId);
+        if (idVideoGame.length > 7) {
+
+            let getForId = await VideoGame.findOne({
+                where: {
+                    id: idVideoGame
+                }
+            }); 
+            //res.json(fetForId);
+           
+            //let getForId = await VideoGame.fidByPk(idVideoGame)
+
+            res.json(getForId ? getForId : 'No se encontró jueguito con ese ID');
+            
+        } else {
+
+        }
+        
     } catch(err) {
         res.send(err);
     }
