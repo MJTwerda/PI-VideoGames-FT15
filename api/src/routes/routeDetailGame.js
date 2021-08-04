@@ -7,16 +7,15 @@ router.use(express.json());
 
 const {VideoGame, Op, Genre, conn} = require('../db.js');
 
-//POSTEO games, CREO
+//POSTEO games, CREO games << /videogame >>>
 
 router.post('/', async (req, res) => {
-    const { name, description, date, rating, plataform} = req.body;
+    const { name, description, released, rating, plataform} = req.body;
     try {
         let createGame = await VideoGame.create({
-            //id,
             name,
             description, 
-            date, 
+            released, 
             rating, 
             plataform
         })
