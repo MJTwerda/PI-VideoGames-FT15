@@ -3,9 +3,10 @@ const { DataTypes } = require('sequelize');
 module.exports = sequelize => {
     sequelize.define('Genre', {
         id: {
-            type: DataTypes.UUID,
+            type: DataTypes.INTEGER,
             primaryKey: true,
-            DefaultValue: DataTypes.UUIDV4,
+            //defaultValue: DataTypes.UUIDV4,
+            allowNull: false
         },
         name: {
             type: DataTypes.STRING,

@@ -7,7 +7,7 @@ const axios = require('axios');
 
 const {VideoGame, Op, Genre, conn} = require('../db.js');
 
-//Son todos GET, acá solo BUSCO videogames
+//Son todos GET, acá solo BUSCO videogames << /videogames >>
 
 router.get('/', async (req, res) => {
     try {
