@@ -5,12 +5,12 @@ module.exports = sequelize => {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
-            //defaultValue: DataTypes.UUIDV4,
             allowNull: false
         },
         name: {
             type: DataTypes.STRING,
-
         }
-    })
-}
+    }, /* {
+        timestamps: false
+    } */
+    )}

@@ -8,7 +8,6 @@ const {VideoGame, Op, Genre, conn} = require('../db.js');
 const axios = require('axios');
 const { API_KEY } = process.env;
 
-
 //Son todos GET, acá solo BUSCO videogames << /videogames >>
 
 router.get('/', async (req, res) => {
@@ -48,7 +47,12 @@ router.get('/', async (req, res) => {
                     name: {[Op.iLike]: `%${name}%`}
                 },
                 attributes: ['id', 'name'],
-                include: Genre
+                include: [{
+                    model: Genre,
+                    through: {
+                        attributes: []
+                        } 
+                }]
             });    
                
             gamesApi = gamesApi.filter(game => 
@@ -62,7 +66,12 @@ router.get('/', async (req, res) => {
         } else {
             let gamesBd = await VideoGame.findAll({
                 attributes: ['id', 'name'], //TENGO QUE INCLUIR IMAGEN
-                include: Genre
+                include: [{
+                    model: Genre,
+                    through: {
+                        attributes: []
+                        } 
+                }]
             });
             let allGamesResultado = gamesBd.concat(gamesApi)
 
