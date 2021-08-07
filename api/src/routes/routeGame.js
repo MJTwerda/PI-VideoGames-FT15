@@ -49,6 +49,7 @@ router.get('/', async (req, res) => {
                 attributes: ['id', 'name'],
                 include: [{
                     model: Genre,
+                    attributes: ['id', 'name'],
                     through: {
                         attributes: []
                         } 
@@ -68,6 +69,7 @@ router.get('/', async (req, res) => {
                 attributes: ['id', 'name'], //TENGO QUE INCLUIR IMAGEN
                 include: [{
                     model: Genre,
+                    attributes: ['id', 'name'],
                     through: {
                         attributes: []
                         } 
