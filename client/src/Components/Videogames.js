@@ -1,14 +1,32 @@
-import React from 'react';
+import React, { Component, useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { Link } from 'react-router-dom';
+import { getVideogames } from '../Actions/actions.js';
 
-export default function Videogames() {
+
+
+function Videogames(props) {
+    const [title, setTitle] = useState('');
+
+    function onChange(e) {
+        setTitle(e.target.value);
+    }
+
+    function handdleSubmit(e) {
+        e.preventDefault();
+        props.getVideogames(title);
+        setTitle('');
+    }
 
     return(
         <div>
             <h3>Acá deben mostrarse todos los Videogames</h3>
-            <input type='text' placeholder='Buscar videogames'/>
-            <input type='submit' value='Buscar' />
+            <form onSubmit={handdleSubmit}>
+                <input type='text' value={title} placeholder='Buscar videogames' onChange={onChange} />
+                <input type='submit' value='Buscar' onSubmit={handdleSubmit} />
+            </form>
 
-            <label for='filtrar'>Filtrar por</label>
+           {/*  <label for='filtrar'>Filtrar por</label>
             <select id='filtrar' name='filtrar'>
                 <option value='' selected='selected'>-selecciona-</option>
                 <option value='genre'>Genre</option>
@@ -23,9 +41,34 @@ export default function Videogames() {
                 <option value='forNameDesc'>Nombre DESC</option>
                 <option value='forRatingAsc'>Rating ASC</option>
                 <option value='forRatingDesc'>Rating DESC</option>
-            </select>
+            </select> */}
+
+            <ul>
+                {props.videogames === 'undefined' ? alert('No se encontraron games') :
+                props.videogames.map(game => {
+                    return (
+                    <Link to={`/videogames/${game.id}`}>
+                        <li>{game.name}</li>
+                    </Link>
+                    )}
+                )}
+            </ul>
         </div>
     )
 }
 
-//export default Videogames;
+function mapStateToProps(state) {
+    return {
+        videogames: state.searchGames,
+        genres: state.genresGames
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        getVideogames: (title) => dispatch(getVideogames(title)),
+        //getGenres: (title) => dispatch(getGenres())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Videogames);
