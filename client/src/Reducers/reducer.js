@@ -1,8 +1,9 @@
-import { GET_VIDEOGAMES, GET_GENRES } from '../Actions/actions.js';
+import { GET_VIDEOGAMES, DETAIL_GAME ,GET_GENRES } from '../Actions/actions.js';
 
 const initialState = {
     searchGames: [],
-    favouriteGames: [],
+    detailGame: {},
+    //favouriteGames: [],
     genresGames: []
 };
 
@@ -17,6 +18,12 @@ if (action.type === GET_GENRES) {
     return {
         ...state,
         genresGames: action.payload
+    }
+}
+if (action.type === DETAIL_GAME) {
+    return {
+        ...state,
+        detailGame: action.payload
     }
 }
 return state

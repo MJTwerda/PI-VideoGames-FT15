@@ -1,10 +1,10 @@
 //import { URL_VIDEOGAMES } from '../constantes.js'
 import axios from 'axios';
 
-export const GET_VIDEOGAMES = 'ALL_VIDEOGAMES';
-export const DETAIL_GAMES = 'DETAIL_GAMES';
-export const GET_GENRES = 'ALL_GENRES';
-
+export const GET_VIDEOGAMES = 'GET_VIDEOGAMES';
+export const DETAIL_GAME = 'DETAIL_GAME';
+export const GET_GENRES = 'GET_GENRES';
+export const GET_IMAGE_GAME = 'GET_IMAGE_GAME';
 
 export function getVideogames(title) {
     return function(dispatch) {
@@ -26,3 +26,12 @@ export function getGenres() {
         })
     }
 }
+
+export function getDetailGame(id) {
+    return function(dispatch) {
+        return axios.get('http://localhost:3001/videogame/' + id)
+        .then(res => {
+            dispatch({type: DETAIL_GAME, payload: res.data})
+        })
+    }
+} 

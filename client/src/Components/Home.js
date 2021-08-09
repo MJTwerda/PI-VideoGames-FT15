@@ -1,12 +1,14 @@
 import React from 'react';
-//import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Home() {
 
     return (
-        <div className="App">
+      <div className="App">
         <h1>Henry Videogames</h1>
-        <button>HOME</button>
+        <Link to='/videogames'>
+            <button>HOME</button>
+        </Link>
       </div>
     )
 }
