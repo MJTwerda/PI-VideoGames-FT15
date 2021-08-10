@@ -7,12 +7,14 @@ import Home from "./Components/Home.js";
 import Genres from "./Components/Genres.js";
 import NavBar from "./Components/NavBar.js";
 import DetailGame from './Components/DetailGame.js';
+import CreateGame from './Components/CreateGame.js';
 
 function App() {
   return (
     <React.Fragment>
       <Route exact path='/' component={Home} />
       <Route path='/:algo' component={NavBar} />
+      <Route exact path='/videogames' component={CreateGame} />
       <Route path='/videogames' component={Videogames} />
       <Route exact path='/videogame/:id' 
             render={({match}) => <DetailGame idGame={match.params.id} />} 

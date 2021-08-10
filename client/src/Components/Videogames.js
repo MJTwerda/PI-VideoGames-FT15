@@ -3,13 +3,12 @@ import React, { Component, useState, useEffect } from "react";
 //import { Link } from 'react-router-dom';
 import { getVideogames } from '../Actions/actions.js';
 import Game from './Game.js';
-
 import {useSelector, useDispatch} from 'react-redux'
+
 
 export default function Videogames(props) {
     const [name, setName] = useState('');
     //const []
-
     const videogames = useSelector(state => state.searchGames);
     const dispatch = useDispatch();
 
