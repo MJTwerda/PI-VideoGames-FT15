@@ -1,9 +1,13 @@
 import React from 'react';
+//import React, { useState } from 'react';
+//import { useSelector, useDispatch } from 'react-redux';
+//import { getVideogames } from '../Actions/actions';
 import { NavLink } from 'react-router-dom';
 import logoNavBar from '../logoNavBar.png';
 
 
 export default function NavBar() {
+    
     return (
         <div>
             <div>

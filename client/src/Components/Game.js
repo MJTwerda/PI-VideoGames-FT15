@@ -1,17 +1,31 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function Game(props) {
+export default function Game({games, loading}) {
+
+    if (loading) {
+        return <h3>Loading Games...</h3>
+    }
 
     return (
-        <ul key={props.id}>
-            <Link to={`/videogame/${props.id}`}>
-            <li>{props.name}</li>
-            </Link>
-                {/* <img src={props.image} width='400' height='250' alt='Search'/>
-            <ul>{props.genres.map(genre => 
-                <li>{genre.name}</li>
-            )}</ul> */}
+        <ul>
+        {
+            games.map(game => {
+                return (
+                <div key={game.id}>
+                    <Link to={`/videogame/${game.id}`}>
+                        <h4>{game.name}</h4>
+                        <img src={game.image} width='400' height='250' alt='Search'/>
+                    </Link>
+                    <ul>
+                        {game.Genres.map(genre => (
+                            <li>{genre.name}</li> 
+                        ))}
+                    </ul>
+                </div>
+            )
+        })}
+            
         </ul>
     )
 }
