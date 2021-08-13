@@ -8,7 +8,7 @@ export const GET_IMAGE_GAME = 'GET_IMAGE_GAME';
 export const ADD_GAME = 'ADD_GAME';
 export const GET_ALL_GAMES = 'GET_ALL_GAMES';
 export const RESET = 'RESET';
-export const FILTER_BY_GENRE = 'FILTER_BY_GENRE';
+export const FILTER_AND_ORDER = 'FILTER_AND_ORDER';
 
 export function getVideogamesByName(title) {
     return function(dispatch) {
@@ -67,23 +67,56 @@ export function reset() {
       };
 }
 
+export function filterAndOrder(stateProcess) {
+    return function (dispatch, getState) {
 
-/* export function filterByGenre(genreName) {
-    return function(getState, dispatch) {
-        let selection = [];
+    let sGenre = stateProcess.genre;
+    let sOrder = stateProcess.order;
+    let objectToProcess;
+    //let state = getState()
+    console.log('STATE REDUXX desde actions: ', getState())
 
-        if (genreName === 'AllGenres') {
-            selection = getState().searchGames
-        }
-        else {
-            selection = getState().searchGames.filter((game) => game.Genres.name.includes(genreName));
-        }
-       dispatch({
-            type: FILTER_BY_GENRE,
-            payload: {
-                genreName, 
-                filtersGenres: selection
-            }
-    })
+    if (getState().searchGamesByName === true) {
+        objectToProcess = [...getState().processGames];
     }
-} */
+    else {
+        objectToProcess = [...getState().searchAllGames];
+    }
+    if (sGenre) {
+        objectToProcess = objectToProcess.filter(game => {
+            return game.Genres.filter(g => g.name.includes(sGenre))})
+    }
+    if(sOrder) {
+        if (sOrder === 'AlfA-Z') {
+            objectToProcess.sort((a, b) => {
+                if (a.name > b.name) {
+                    return 1
+                } else return -1
+            }) 
+        } 
+        if (sOrder === 'AlfZ-A') {
+            objectToProcess.sort((a, b) => {
+                if (a.name < b.name) {
+                    return 1
+                } else return -1
+            }) 
+        }
+        if (sOrder === 'ascRating') {
+            objectToProcess.sort((a, b) => {return a.rating - b.rating})
+        } 
+        if (sOrder === 'descRating') {
+            objectToProcess = objectToProcess.sort((a, b) => {return b.rating - a.rating})
+        }
+    }
+    return function(dispatch) {
+        dispatch({
+            type: FILTER_AND_ORDER,
+            payload: objectToProcess
+        })
+    }
+}
+}
+
+
+
+

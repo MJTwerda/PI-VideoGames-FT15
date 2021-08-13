@@ -1,4 +1,4 @@
-import { GET_VIDEOGAMES_BY_NAME, DETAIL_GAME , GET_GENRES, ADD_GAME, GET_ALL_GAMES, RESET, FILTER_BY_GENRE } from '../Actions/actions.js';
+import { GET_VIDEOGAMES_BY_NAME, DETAIL_GAME , GET_GENRES, ADD_GAME, GET_ALL_GAMES, RESET, FILTER_AND_ORDER } from '../Actions/actions.js';
 
 const initialState = {
     searchAllGames: [],
@@ -51,12 +51,10 @@ export function rootReducer(state = initialState, action) {
             //searchAllGames: [],
         }
     }
-    if (action.type === FILTER_BY_GENRE) {
-        
+    if (action.type === FILTER_AND_ORDER) {
         return {
             ...state,
-            seeGenres: action.payload.genreName,
-            gamesFiltred: action.payload.filtersGenres
+            processGames: action.payload
         }
     }
     return state
