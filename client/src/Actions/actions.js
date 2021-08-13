@@ -1,19 +1,20 @@
 //import { URL_VIDEOGAMES } from '../constantes.js'
 import axios from 'axios';
 
-export const GET_VIDEOGAMES = 'GET_VIDEOGAMES';
+export const GET_VIDEOGAMES_BY_NAME = 'GET_VIDEOGAMES';
 export const DETAIL_GAME = 'DETAIL_GAME';
 export const GET_GENRES = 'GET_GENRES';
 export const GET_IMAGE_GAME = 'GET_IMAGE_GAME';
 export const ADD_GAME = 'ADD_GAME';
 export const GET_ALL_GAMES = 'GET_ALL_GAMES';
 export const RESET = 'RESET';
+export const FILTER_BY_GENRE = 'FILTER_BY_GENRE';
 
-export function getVideogames(title) {
+export function getVideogamesByName(title) {
     return function(dispatch) {
         return axios.get('http://localhost:3001/videogames?name=' + title)
         .then(res => {
-            dispatch({type: GET_VIDEOGAMES, payload: res.data})
+            dispatch({type: GET_VIDEOGAMES_BY_NAME, payload: res.data})
         })
         .catch(err => {return err})
     }
@@ -65,3 +66,24 @@ export function reset() {
         });
       };
 }
+
+
+/* export function filterByGenre(genreName) {
+    return function(getState, dispatch) {
+        let selection = [];
+
+        if (genreName === 'AllGenres') {
+            selection = getState().searchGames
+        }
+        else {
+            selection = getState().searchGames.filter((game) => game.Genres.name.includes(genreName));
+        }
+       dispatch({
+            type: FILTER_BY_GENRE,
+            payload: {
+                genreName, 
+                filtersGenres: selection
+            }
+    })
+    }
+} */

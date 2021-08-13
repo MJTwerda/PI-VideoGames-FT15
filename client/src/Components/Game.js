@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function Game({games, loading}) {
+//export default function Game({games, loading}) {
 
-    if (loading) {
+export default function Game({games}) {
+    /* if (loading) {
         return <h3>Loading Games...</h3>
-    }
+    } */
 
     return (
         <ul>
