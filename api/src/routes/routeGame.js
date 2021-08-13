@@ -37,10 +37,11 @@ router.get('/', async (req, res) => {
                 id: game.id,
                 name: game.name,
                 image: game.background_image,
-                Genres: genre
+                Genres: genre,
+                rating: game.rating
             }
             })
-        //console.log('GAMESAPIIII:', gamesApi[0], gamesApi[1], gamesApi[10]);
+        //console.log('GAMESAPIIII:', gamesApi.slice(0, 2));
         if (name) {
            let gamesBd = await VideoGame.findAll({
                 where: {
