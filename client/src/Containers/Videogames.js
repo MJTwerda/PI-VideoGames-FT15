@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getAllGames, reset, getGenres } from '../Actions/actions.js';
+import { reset } from '../Actions/actions.js';
 
 import Game from '../Components/Game.js';
 import Pagination from '../Components/Pagination.js';
+import ActGames from './ActGames.js';
 //import OrderGames from '../Components/OrderGames.js';
 
 export default function Videogames() {
 
-    //const [loading, setLoading] = useState(false);
-    //const games = useSelector(state => state.searchAllGames);
     const games = useSelector(state => state.processGames);
 
     //Para el paginado
@@ -20,10 +19,6 @@ export default function Videogames() {
 
     useEffect(() => {
         dispatch(reset());
-        /* if (!games.length) {
-            dispatch(getAllGames());
-            dispatch(getGenres());
-        } */
     }, []);
     
     const lastIndex = currentPage * gamesPerPage; //pag en la que estoy(2) * 9
@@ -41,7 +36,7 @@ export default function Videogames() {
         setcurrentPage(currentPage + 1)
     }
     
-    console.log('AllSearchGames del Store: ', games);
+    console.log('processGames del Store: ', games);
     console.log('CURRENT GAMESSS: ', currentGames);
      
     if (!games.length) {
@@ -50,6 +45,7 @@ export default function Videogames() {
 
     return (
          <div>
+            <ActGames />
             <Game games={currentGames} /> 
             <Pagination 
                 gamesPerPage={gamesPerPage} //9
@@ -65,19 +61,3 @@ export default function Videogames() {
 
 
 
-/* useEffect(() => {
-        let initial = async function() {
-            setLoading(true);
-            await dispatch(reset());
-            await dispatch(getAllGames());
-            await dispatch(getGenres()); 
-            setLoading(false);
-        }
-        initial()
-        console.log('ALL GAMESS: ', games);
-    }, []);
- */
-    /* useEffect(() => {
-        setSeeGames(games);
-        console.log('SEE GAMES: copia del store: ', seeGames);
-    }, []); */
