@@ -152,7 +152,7 @@ export default function ActGames() {
             <input type='submit' value='Apply' onSubmit={handdleOrderSubmit}/>
         </form>
 
-        <form onChange={handdleFilterSubmit}>
+        <form onSubmit={handdleFilterSubmit}>
             <label>Filter by Genres</label>
                 <select name='FilterGenre' onChange={handdleInputFilter}>
                     <option selected value='NullSelGenre'>-Select Genre-</option>

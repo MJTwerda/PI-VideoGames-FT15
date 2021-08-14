@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Pagination({gamesPerPage, totalGames, paginate, prev, next}) {
+function Pagination({gamesPerPage, totalGames, paginate, prev, next, numPag}) {
     const pageNumbers = [];
 
     for(let i = 1; i <= Math.ceil(totalGames / gamesPerPage); i++) {
@@ -20,8 +20,8 @@ function Pagination({gamesPerPage, totalGames, paginate, prev, next}) {
 
                     )}
                 )}
-                <button onClick={() => prev()}>Prev</button>
-                <button onClick={() => next()}>Next</button>
+                <button onClick={() => prev()} disabled={numPag === 1}>Prev</button>
+                <button onClick={() => next()} disabled={numPag === pageNumbers.length}>Next</button>
             </ul>
         </nav>
 

@@ -53,6 +53,7 @@ export default function Videogames() {
                 paginate={paginate}
                 prev={paginateButtonPrev}
                 next={paginateButtonNext}
+                numPag={currentPage}
             />
             <h5>Page {currentPage}</h5>
             </div>
