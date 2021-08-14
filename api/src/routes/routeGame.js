@@ -28,10 +28,11 @@ router.get('/', async (req, res) => {
         };
         gamesApi = gamesApi.map(game => {
             let genre = game.genres.map(g => {
-                return {
+                return g.name
+                /* return {
                     id: g.id,
                     name: g.name
-                }
+                } */
             })
             return {
                 id: game.id,
