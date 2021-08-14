@@ -67,20 +67,22 @@ export function reset() {
       };
 }
 
-export function filterAndOrder(stateProcess) {
+// ---------------Primero--------------
+/* export function filterAndOrder(stateProcess) {
     return function (dispatch, getState) {
 
     let sGenre = stateProcess.genre;
     let sOrder = stateProcess.order;
+    let byName = getState().searchGamesByName;
+    const procesState = getState().processGames;
+    const allGamesState = getState().searchAllGames;
     let objectToProcess;
-    //let state = getState()
-    console.log('STATE REDUXX desde actions: ', getState())
 
-    if (getState().searchGamesByName === true) {
-        objectToProcess = [...getState().processGames];
+    if (byName) {
+        objectToProcess = [...procesState];
     }
-    else {
-        objectToProcess = [...getState().searchAllGames];
+    if (!byName) {
+        objectToProcess = [...allGamesState];
     }
     if (sGenre) {
         objectToProcess = objectToProcess.filter(game => {
@@ -107,16 +109,108 @@ export function filterAndOrder(stateProcess) {
         if (sOrder === 'descRating') {
             objectToProcess = objectToProcess.sort((a, b) => {return b.rating - a.rating})
         }
-    }
-    return function(dispatch) {
+    } 
         dispatch({
             type: FILTER_AND_ORDER,
             payload: objectToProcess
         })
+    
+}
+} */
+
+//----------------para la segunda prueba en <AtGames /> ------------------
+export const ORDER_GAMES = 'ORDER_GAMES';
+export const FILTER_BY_GENRES = 'FILTER_BY_GENRES';
+
+export function OrderTwo (order) {
+    return function (dispatch, getState) {
+        
+        let byName = getState().searchGamesByName;
+        let originGames = getState().searchAllGames;
+        let processForOrder = getState().processGames;
+        let objectToProcess = [...processForOrder];
+
+        /* if (byName) {
+            objectToProcess = [...processForOrder];
+        }
+        if(!byName) {
+            objectToProcess = [...originGames];
+        } */
+
+        if (order === 'Not Order') {
+            dispatch({
+                type: ORDER_GAMES,
+                payload: [...originGames]
+            })
+        }
+        if (order === 'AlfA-Z') {
+            objectToProcess.sort((a, b) => {
+                if (a.name > b.name) {
+                    return 1
+                } else return -1
+            }) 
+        }
+        if (order === 'AlfZ-A') {
+            objectToProcess.sort((a, b) => {
+                if (a.name < b.name) {
+                    return 1
+                } else return -1
+            }) 
+        }
+        if (order === 'ascRating') {
+            objectToProcess.sort((a, b) => {return a.rating - b.rating})
+        }
+        if (order === 'descRating') {
+            objectToProcess.sort((a, b) => {return b.rating - a.rating})
+        }
+        
+        dispatch({
+            type: ORDER_GAMES,
+            payload: objectToProcess
+        })
     }
 }
+// --------------- para genre-----------
+export function filterTwo(genre) {
+    return function(dispatch, getState) {
+        let flagName = getState().searchGamesByName;
+        let originGames = getState().searchAllGames;
+        let processForOrder = getState().processGames;
+
+        let processByFilter =  [...processForOrder];
+
+        /* if (flagName) {
+            processByFilter = [...processForOrder];
+        }
+        if (!flagName) {
+            processByFilter = [...originGames];
+        } */
+
+        if (genre === 'NullSelGenre') {
+            dispatch({
+                type: ORDER_GAMES,
+                payload: [...originGames]
+            })
+        }
+        else {
+            processByFilter = processForOrder.filter(game => 
+                game.Genres.includes(genre))
+        }
+        dispatch({
+            type: FILTER_BY_GENRES,
+            payload: processByFilter
+        })
+    }
 }
 
 
+//---------------- HARDCODEADO ---------------------
+/* export const HARDCO = 'HARDCO';
 
-
+export function hardcodeado() {
+    return function (dispatch) {
+        dispatch({
+            type: HARDCO
+        })
+    }
+} */

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+/* import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { filterAndOrder } from '../Actions/actions.js';
 
@@ -8,7 +8,7 @@ export default function ActGames() {
         order: null,
         genre: null
     });
-
+    
     const allGenres = useSelector(state => state.genresGames);
     const dispatch = useDispatch();
 
@@ -31,8 +31,8 @@ export default function ActGames() {
         console.log('valor de casilla filtrado/ordenado: ', value);
         console.log('nombre de casilla filtrado/ordenado: ', name)
     }
-
-    function handdleSubmit(e) {
+ 
+     function handdleSubmit(e) {
         e.preventDefault();
         let stateProcess = {
             order: seeGames.order,
@@ -75,26 +75,68 @@ export default function ActGames() {
         </form>
         </div>
     )
-}
+} */
 
-/* function handdleSubmit(e) {
+//-------------Para usar sin botón de enviado de filtrado u ordenamiento ---------
+
+
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { OrderTwo, filterTwo } from '../Actions/actions.js';
+
+export default function ActGames() {
+    const [orders, setOrders] = useState('');
+    const [filters, setFilters] = useState('');
+
+    const allGenres = useSelector(state => state.genresGames);
+    const dispatch = useDispatch();
+    
+    function handdleInputOrder(e) {
+        let value = e.target.value;
+
+        if (value === 'NullSelected') {
+            setOrders('Not Order')
+        }
+        if (value === 'AlfA-Z' || value === 'AlfZ-A' || value === 'ascRating' || value === 'descRating') {
+            setOrders(value)
+        }
+        console.log('valor de casilla filtrado/ordenado: ', value);
+    }
+
+    function handdleInputFilter(e) {
+        let value = e.target.value;
+        let name = e.target.name;
+
+        if (name === 'FilterGenre' && value === 'NullSelGenre') {
+            setFilters('NullSelGenre')
+        }
+        if(name === 'FilterGenre') {
+            setFilters(value)
+        }
+        console.log('value de option genre: ', value);
+        console.log('name de option genre: ', name)
+    }
+
+    function handdleOrderSubmit(e) {
+        dispatch(OrderTwo(orders));
         e.preventDefault();
-        let stateProcess = {
-            order: seeGames.order,
-            genre: seeGames.genre
-        };
-        dispatch(filterAndOrder(stateProcess));
-        setSeeGames({order: null, genre: null});
-        console.log('Filtered and Ordered be okay');
-    } */
+        setOrders('');
+        console.log('Ordered has be okay');
+    } 
 
-//Para usar sin botón de enviado de filtrado u ordenamiento
-    /* 
+    function handdleFilterSubmit(e) {
+        dispatch(filterTwo(filters));
+        e.preventDefault();
+        setFilters('')
+        console.log('Filtered has be okay');
+    }
+
+     
     return(
         <div>
-        <form onSubmit={handdleOrderGames} >
+        <form onSubmit={handdleOrderSubmit} >
             <label>See Games</label>
-                <select onChange={handdleOrderGames}>
+                <select onChange={handdleInputOrder}>
                 <option selected value='NullSelected'>-Filter/Order-</option>
 
                 <optgroup label='by Name' >
@@ -107,17 +149,45 @@ export default function ActGames() {
                     <option value='descRating'>Max-Min</option>
                 </optgroup>
                 </select>
+            <input type='submit' value='Apply' onSubmit={handdleOrderSubmit}/>
         </form>
-        <form onChange={handdleFilterByGenre}>
+
+        <form onChange={handdleFilterSubmit}>
             <label>Filter by Genres</label>
-                <select name='FilterGenre' onChange={handdleFilterByGenre}>
+                <select name='FilterGenre' onChange={handdleInputFilter}>
                     <option selected value='NullSelGenre'>-Select Genre-</option>
                     {allGenres.map(genre =>
-                        <option key={genre.id} value={genre.name}>{genre.name}</option>
+                        <option key={genre.name} value={genre.name}>{genre.name}</option>
                     )}
                 </select>
-
-                </form>
-                </div>
+            <input type='submit' value='Apply' onSubmit={handdleFilterSubmit}/>  
+        </form>
+        </div>
             )
-    */
+}
+
+//-------------------- HARDCODEADO -----------------
+
+/* import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { hardcodeado } from '../Actions/actions.js';
+
+export default function ActGames() {
+
+
+    const dispatch = useDispatch();
+
+    function handdleSubmitHard(e) {
+        e.preventDefault();
+        dispatch(hardcodeado());
+    }
+    
+    return(
+        <div>
+        <form onSubmit={handdleSubmitHard} >
+            <input type='submit' onSubmit={handdleSubmitHard} value='Hardcodealo dale'/>    
+        </form>
+        </div>
+    )
+
+} */

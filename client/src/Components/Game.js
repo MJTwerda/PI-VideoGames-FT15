@@ -1,12 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-//export default function Game({games, loading}) {
-
 export default function Game({games}) {
-    /* if (loading) {
-        return <h3>Loading Games...</h3>
-    } */
 
     return (
         <ul>
@@ -20,7 +15,7 @@ export default function Game({games}) {
                     </Link>
                     <ul>
                         {game.Genres.map(genre => (
-                            <li>{genre.name}</li> 
+                            <li key={genre}>{genre}</li> 
                         ))}
                     </ul>
                 </div>

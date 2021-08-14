@@ -20,7 +20,7 @@ export default function SearchGames() {
     function handdleSubmitAllGames(e) {
         e.preventDefault();
             dispatch(getAllGames());
-            //dispatch(getGenres());
+            dispatch(getGenres());
             setName('');
     }
 

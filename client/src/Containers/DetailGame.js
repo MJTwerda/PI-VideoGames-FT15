@@ -14,6 +14,10 @@ export default function DetailGame(props) {
         dispatch(getDetailGame(props.idGame));
     }, [])
 
+    if (!detailGame) {
+        return <h3>Search Details of Game...</h3>
+    }
+
     return (
         <div key={detailGame.id}>
             <h3>DETALLES DEL GAME</h3>
