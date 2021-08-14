@@ -5,7 +5,6 @@ import { getAllGames, getGenres } from '../Actions/actions.js';
 
 function Home() {
 
-  
   const dispatch = useDispatch();
 
   //Cargo mi store, searchAllGames y processGames para trabajar con este último

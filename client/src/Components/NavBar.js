@@ -19,7 +19,7 @@ export default function NavBar() {
                 <ul>
                     <h3>
                         <NavLink exact to="/videogames" >Videogames</NavLink>
-                        <NavLink to="/genres" >Genres</NavLink>
+                        <NavLink to="/creategame" >Create</NavLink>
                     </h3>
                 </ul>
             </nav>

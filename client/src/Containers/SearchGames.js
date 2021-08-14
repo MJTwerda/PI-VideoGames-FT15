@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from "react-redux";
-import { getVideogamesByName, getAllGames } from '../Actions/actions.js';
+import { getVideogamesByName, getAllGames, getGenres } from '../Actions/actions.js';
 
 export default function SearchGames() {
 
@@ -14,11 +14,13 @@ export default function SearchGames() {
     function handdleSubmit(e) {
             e.preventDefault();
             dispatch(getVideogamesByName(name));
+            dispatch(getGenres());
             setName('') 
     }
     function handdleSubmitAllGames(e) {
         e.preventDefault();
-            dispatch(getAllGames())
+            dispatch(getAllGames());
+            //dispatch(getGenres());
             setName('');
     }
 
