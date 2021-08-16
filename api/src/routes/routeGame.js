@@ -28,7 +28,11 @@ router.get('/', async (req, res) => {
         };
         gamesApi = gamesApi.map(game => {
             let genre = game.genres.map(g => {
-                return g.name
+                //return g.name
+                return {
+                    id: g.slug,
+                    name: g.name
+                }
                 /* return {
                     id: g.id,
                     name: g.name
@@ -52,6 +56,7 @@ router.get('/', async (req, res) => {
                 include: [{
                     model: Genre,
                     attributes: ['id', 'name'],
+                    //attributes: ['name'],
                     through: {
                         attributes: []
                         } 
@@ -72,11 +77,13 @@ router.get('/', async (req, res) => {
                 include: [{
                     model: Genre,
                     attributes: ['id', 'name'],
+                    //attributes: ['name'],
                     through: {
                         attributes: []
                         } 
                 }]
             });
+
             let allGamesResultado = gamesBd.concat(gamesApi)
 
             res.json(allGamesResultado.length ? allGamesResultado : 'Videogames cannot be Displayed. Please try later')
