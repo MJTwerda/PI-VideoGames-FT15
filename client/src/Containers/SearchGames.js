@@ -28,11 +28,11 @@ export default function SearchGames() {
         <div>
         <form onSubmit={handdleSubmit}>
             <input type='text' value={name} placeholder='Search videogames' onChange={onChange} />
-            <input  type='submit' name={'ByName'}  
+            <input  type='submit' name='ByName'  
                     value='By Name' onSubmit={handdleSubmit} />
         </form>
         <form onSubmit={handdleSubmitAllGames}>
-            <input  type='submit' name={'All'} 
+            <input  type='submit' name='All' 
                     value='All Games' onSubmit={handdleSubmitAllGames} />
         </form>
         </div>

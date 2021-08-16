@@ -5,7 +5,6 @@ import { reset } from '../Actions/actions.js';
 import Game from '../Components/Game.js';
 import Pagination from '../Components/Pagination.js';
 import ActGames from './ActGames.js';
-//import OrderGames from '../Components/OrderGames.js';
 
 export default function Videogames() {
 
@@ -36,8 +35,8 @@ export default function Videogames() {
         setcurrentPage(currentPage + 1)
     }
     
-    console.log('processGames del Store: ', games);
-    console.log('CURRENT GAMESSS: ', currentGames);
+    //console.log('processGames del Store: ', games);
+    //console.log('CURRENT GAMESSS: ', currentGames);
      
     if (!games.length) {
         return <h3>Loading Games...</h3>

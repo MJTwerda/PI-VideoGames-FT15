@@ -1,4 +1,4 @@
-import { GET_VIDEOGAMES_BY_NAME, DETAIL_GAME , GET_GENRES, ADD_GAME, GET_ALL_GAMES, RESET, /* FILTER_AND_ORDER, */ ORDER_GAMES, FILTER_BY_GENRES,/* HARDCO */} from '../Actions/actions.js';
+import { GET_VIDEOGAMES_BY_NAME, DETAIL_GAME , GET_GENRES, ADD_NEW_GAME, GET_ALL_GAMES, RESET, /* FILTER_AND_ORDER, */ ORDER_GAMES, FILTER_BY_GENRES,/* HARDCO */} from '../Actions/actions.js';
 
 const initialState = {
     searchAllGames: [],
@@ -38,10 +38,11 @@ export function rootReducer(state = initialState, action) {
             detailGame: action.payload
         }
     }
-    if (action.type === ADD_GAME) {
+    if (action.type === ADD_NEW_GAME) {
         return {
             ...state,
-            searchAllGames: action.payload
+            searchAllGames: [...state.searchAllGames].concat(action.payload),
+            processGames: [...state.processGames].concat(action.payload)
         }
     }
     if (action.type === RESET) {

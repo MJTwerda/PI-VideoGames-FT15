@@ -15,7 +15,7 @@ export default function Game({games}) {
                     </Link>
                     <ul>
                         {game.Genres.map(genre => (
-                            <li key={genre}>{genre}</li> 
+                            <li key={genre.id}>{genre.name}</li> 
                         ))}
                     </ul>
                 </div>
