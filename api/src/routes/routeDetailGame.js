@@ -11,14 +11,16 @@ const { API_KEY } = process.env;
 //POSTEO games, CREO games << /videogame >>>
 
 router.post('/', async (req, res) => {
-    const { name, description, released, rating, platforms, genres} = req.body;
+    const { name, description, released, rating, platforms, image, genres} = req.body;
     try {
         let createGame = await VideoGame.create({
             name,
             description, 
             released, 
             rating, 
-            platforms: platforms.split(',')
+            image,
+            platforms
+            //platforms: platforms.split(',')
         })
         if (genres) {
             let gameWithGenre = await createGame.setGenres(genres)
@@ -63,14 +65,14 @@ router.get('/:idVideoGame', async (req, res) => {
                 rating: gameApiPromise.rating,
                 platforms: gameApiPromise.platforms.map(plat => {
                     return {
-                        id: plat.platform.id,
+                        id: plat.platform.slug,
                         name: plat.platform.name,
                         platImage: plat.platform.image_background
                     }
                 }),
                 Genres: gameApiPromise.genres.map(genre => {
                     return {
-                        id: genre.id,
+                        id: genre.slug,
                         name: genre.name
                     }
                 })

@@ -52,7 +52,7 @@ router.get('/', async (req, res) => {
                 where: {
                     name: {[Op.iLike]: `%${name}%`}
                 },
-                attributes: ['id', 'name'],
+                attributes: ['id', 'name', 'image'],
                 include: [{
                     model: Genre,
                     attributes: ['id', 'name'],
@@ -68,12 +68,13 @@ router.get('/', async (req, res) => {
                 ))
                 
         let allGamesResultado = gamesBd.concat(gamesApi)
-    
-        res.json(allGamesResultado.length ? allGamesResultado.slice(0, 15) : 'There are no games with this name. Please try another name') 
+        
+        res.json(allGamesResultado.length ? allGamesResultado : 'There are no games with this name. Please try another name') 
+        //res.json(allGamesResultado.length ? allGamesResultado.slice(0, 15) : 'There are no games with this name. Please try another name') 
             
         } else {
             let gamesBd = await VideoGame.findAll({
-                attributes: ['id', 'name'], //TENGO QUE INCLUIR IMAGEN
+                attributes: ['id', 'name', 'image'], //TENGO QUE INCLUIR IMAGEN
                 include: [{
                     model: Genre,
                     attributes: ['id', 'name'],
