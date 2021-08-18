@@ -1,0 +1,29 @@
+.fondo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../../images/black-1072366_1920.jpg');
+    /* background-image: url('../../images/fondo_fire.jpg'); */
+    background-size: cover;
+    Height: 98vh;
+}
+
+.title{
+    position: absolute;
+    font-size: 60px;
+    top: 100px;
+    color:rgb(212, 201, 201);
+    align-self: initial;
+}
+
+.btn {
+    width: 1.8cm;
+    background-color:rgb(138, 134, 134);
+    color:rgb(36, 35, 35);
+    border-radius: 10%;
+    Align-self: center;
+}
+.btn:hover {
+    padding: 3px;
+    background-color:rgb(199, 197, 197);
+}

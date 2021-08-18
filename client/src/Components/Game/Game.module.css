@@ -1,0 +1,26 @@
+.container {  
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 70px;
+}
+
+.indGame {
+    opacity: 80%;
+}
+
+.titleGame {
+    display: flex;
+    justify-content: center;
+    color:lightyellow;
+}
+
+.ulGame {
+    color:lightyellow;
+}
+
+.poster {
+    width: 350px;
+    height: 250px;
+    border-radius: 20px; 
+}
+
