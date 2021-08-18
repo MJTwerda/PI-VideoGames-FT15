@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { OrderTwo, filterTwo, MyGames } from '../../Actions/actions.js';
+import { OrderTwo, filterTwo } from '../../Actions/actions.js';
 
-export default function ActGames({myGamesOnly}) {
+import style from './ActGames.module.css';
+
+export default function ActGames() {
     const [orders, setOrders] = useState('');
     const [filters, setFilters] = useState('');
 
     const allGenres = useSelector(state => state.genresGames);
-    const myGames = useSelector(state => state.allMyGames);
 
     const dispatch = useDispatch();
     
@@ -53,20 +54,14 @@ export default function ActGames({myGamesOnly}) {
         else return ('No hay games con ese Genre')
         console.log('Filtered has be okay');
     }
-
-    function handdleSubmitMyGames(e) {
-        e.preventDefault();
-        dispatch(MyGames());
-        //seeGames(myGames);
-        //myGamesOnly();
-    }
      
     return(
-        <div>
-        <form onSubmit={handdleOrderSubmit} >
-            <label>See Games</label>
-                <select onChange={handdleInputOrder}>
-                <option selected value='NullSelected'>-Filter/Order-</option>
+        <div className={style.gral}>
+
+        <form onSubmit={handdleOrderSubmit} className={style.or}>
+            <label className={style.label}>See Games </label>
+                <select onChange={handdleInputOrder} className={style.selectOr}>
+                <option selected value='NullSelected' className={style.options}>-Filter/Order-</option>
 
                 <optgroup label='by Name' >
                     <option value='AlfA-Z'>ASC</option>
@@ -78,57 +73,24 @@ export default function ActGames({myGamesOnly}) {
                     <option value='descRating'>Max-Min</option>
                 </optgroup>
                 </select>
-            <input type='submit' value='Apply' onSubmit={handdleOrderSubmit}/>
+
+            <input  type='submit' value='Apply' 
+                    onSubmit={handdleOrderSubmit} className={style.btns}/>    
         </form>
 
-        <form onSubmit={handdleFilterSubmit}>
-            <label>Filter by Genres</label>
-                <select name='FilterGenre' onChange={handdleInputFilter}>
-                    <option selected value='NullSelGenre'>-Select Genre-</option>
+        <form onSubmit={handdleFilterSubmit} className={style.fil}>
+            <label className={style.label}>Filter by Genres </label>
+                <select name='FilterGenre' onChange={handdleInputFilter} className={style.selectFilt}>
+
+                    <option selected value='NullSelGenre' className={style.options}>-Select Genre-</option>
                     {allGenres.map(genre =>
-                        <option key={genre.name} value={genre.name}>{genre.name}</option>
-                    )}
+                        <option key={genre.name} value={genre.name}>{genre.name}</option>)}
+
                 </select>
-            <input type='submit' value='Apply' onSubmit={handdleFilterSubmit}/>  
+            <input  type='submit' value='Apply' 
+                    onSubmit={handdleFilterSubmit} className={style.btns}/>  
         </form>
 
-        <form>
-            <input  type='submit' name='MyGames'
-                    value='My Games' onSubmit={handdleSubmitMyGames} />
-        </form>
-        </div>
-            )
-}
-
-
-
-
-
-
-
-
-//-------------------- HARDCODEADO -----------------
-
-/* import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { hardcodeado } from '../Actions/actions.js';
-
-export default function ActGames() {
-
-
-    const dispatch = useDispatch();
-
-    function handdleSubmitHard(e) {
-        e.preventDefault();
-        dispatch(hardcodeado());
-    }
-    
-    return(
-        <div>
-        <form onSubmit={handdleSubmitHard} >
-            <input type='submit' onSubmit={handdleSubmitHard} value='Hardcodealo dale'/>    
-        </form>
         </div>
     )
-
-} */
+}

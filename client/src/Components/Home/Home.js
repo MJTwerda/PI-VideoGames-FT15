@@ -20,7 +20,6 @@ function Home() {
 
     return (
       <div className={style.fondo}>
-      {/* <div className="App"> */}
         <h1 className={style.title}>Henry Videogames</h1>
         <Link to='/videogames'>
             <button className={style.btn}>HOME</button>

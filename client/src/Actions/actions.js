@@ -9,8 +9,10 @@ export const ADD_NEW_GAME = 'ADD_NEW_GAME';
 export const GET_ALL_GAMES = 'GET_ALL_GAMES';
 export const RESET = 'RESET';
 export const FILTER_AND_ORDER = 'FILTER_AND_ORDER';
+export const MY_GAMES = 'MY_GAMES';
+export const GET_ALL_PLATFORMS = 'GET_ALL_PLATFORMS';
 
-export function getVideogamesByName(title) {
+ export function getVideogamesByName(title) {
     return function(dispatch) {
         return axios.get('http://localhost:3001/videogames?name=' + title)
         .then(res => {
@@ -18,7 +20,7 @@ export function getVideogamesByName(title) {
         })
         .catch(err => {return err})
     }
-}
+}  
 export function getAllGames() {
     return function(dispatch) {
         return axios.get('http://localhost:3001/videogames/')
@@ -27,7 +29,7 @@ export function getAllGames() {
         })
         .catch(err => {return err})
     }
-}
+}  
 
 export function getGenres() {
     return function(dispatch) {
@@ -67,6 +69,29 @@ export function reset() {
       };
 }
 
+export function getPlatforms() {
+    return function(dispatch) {
+        return axios.get('http://localhost:3001/platforms')
+        .then(res => {
+            dispatch({
+                type: GET_ALL_PLATFORMS,
+                payload: res.data
+            })
+        })
+        .catch(err => {return err})
+    }
+}
+
+// Filtrar por juegos propios
+export function MyGames() {
+    return function (dispatch) {
+            dispatch({
+                type: MY_GAMES
+            })
+       
+    }
+}
+
 //----------------para la segunda prueba en <AtGames /> ------------------ FUNCIONA
 export const ORDER_GAMES = 'ORDER_GAMES';
 export const FILTER_BY_GENRES = 'FILTER_BY_GENRES';
@@ -74,17 +99,9 @@ export const FILTER_BY_GENRES = 'FILTER_BY_GENRES';
 export function OrderTwo (order) {
     return function (dispatch, getState) {
         
-        let byName = getState().searchGamesByName;
         let originGames = getState().searchAllGames;
         let processForOrder = getState().processGames;
         let objectToProcess = [...processForOrder];
-
-        /* if (byName) {
-            objectToProcess = [...processForOrder];
-        }
-        if(!byName) {
-            objectToProcess = [...originGames];
-        } */
 
         if (order === 'Not Order') {
             dispatch({
@@ -119,49 +136,16 @@ export function OrderTwo (order) {
         })
     }
 }
-// --------------- para genre----------- FUNCIONA CON LA DE ARRIBA
-// formato genre ['action', 'adventure']
-/* export function filterTwo(genre) {
-    return function(dispatch, getState) {
-        let flagName = getState().searchGamesByName;
-        let originGames = getState().searchAllGames;
-        let processForOrder = getState().processGames;
-
-        let processByFilter =  [...processForOrder];
-
-//         if (flagName) {
-//            processByFilter = [...processForOrder];
-//        }
-//        if (!flagName) {
-//            processByFilter = [...originGames];
-//        } 
-
-        if (genre === 'NullSelGenre') {
-            dispatch({
-                type: ORDER_GAMES,
-                payload: [...originGames]
-            })
-        }
-        else {
-            processByFilter = processForOrder.filter(game => 
-                game.Genres.includes(genre))
-        }
-        dispatch({
-            type: FILTER_BY_GENRES,
-            payload: processByFilter
-        })
-    }
-} */
 
 //------------ prueba cambiando formato de genre [{id: '...', name: '...'}, {id:'..', name:'...'}]
-
+// ---------FUNCIONA ------------
 export function filterTwo(genre) {
     return function(dispatch, getState) {
         let flagName = getState().searchGamesByName;
         let originGames = getState().searchAllGames;
         let processForOrder = getState().processGames;
 
-        let processByFilter =  [];
+        let processByFilter = [];
 
         if (genre === 'NullSelGenre') {
             dispatch({
@@ -208,17 +192,3 @@ export function filterTwo(genre) {
 
 
 
-
-
-
-
-//---------------- HARDCODEADO ---------------------
-/* export const HARDCO = 'HARDCO';
-
-export function hardcodeado() {
-    return function (dispatch) {
-        dispatch({
-            type: HARDCO
-        })
-    }
-} */

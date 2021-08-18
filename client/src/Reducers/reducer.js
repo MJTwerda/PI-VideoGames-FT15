@@ -1,13 +1,15 @@
-import { GET_VIDEOGAMES_BY_NAME, DETAIL_GAME , GET_GENRES, ADD_NEW_GAME, GET_ALL_GAMES, RESET, /* FILTER_AND_ORDER, */ ORDER_GAMES, FILTER_BY_GENRES,/* HARDCO */} from '../Actions/actions.js';
+import { GET_VIDEOGAMES_BY_NAME, DETAIL_GAME , GET_GENRES, ADD_NEW_GAME, GET_ALL_GAMES, RESET, /* FILTER_AND_ORDER, */ ORDER_GAMES, FILTER_BY_GENRES, MY_GAMES, GET_ALL_PLATFORMS} from '../Actions/actions.js';
 
 const initialState = {
     searchAllGames: [],
     processGames: [],
     detailGame: {},
     genresGames: [],
-    searchGamesByName: false
+    searchGamesByName: false,
+    //allMyGames: [],
+    myGamesOnly: false,
+    platformsGames: []
 };
-
 
 export function rootReducer(state = initialState, action) {
 
@@ -15,6 +17,7 @@ export function rootReducer(state = initialState, action) {
         return {
             ...state,
             searchGamesByName: false,
+            myGamesOnly: false,
             searchAllGames: action.payload,
             processGames: action.payload
         }
@@ -24,6 +27,13 @@ export function rootReducer(state = initialState, action) {
             ...state,
             searchGamesByName: true,
             processGames: action.payload
+        }
+    }
+    if (action.type === MY_GAMES) {
+        return {
+            ...state,
+            myGamesOnly: true,
+            processGames: [...state.processGames].filter(g => g.id.length > 8)
         }
     }
     if (action.type === GET_GENRES) {
@@ -42,25 +52,22 @@ export function rootReducer(state = initialState, action) {
         return {
             ...state,
             searchAllGames: [...state.searchAllGames].concat(action.payload),
-            processGames: [...state.processGames].concat(action.payload)
+            processGames: [...state.processGames].concat(action.payload),
+            //allMyGames: [...state.allMyGames].concat(action.payload)
         }
     }
     if (action.type === RESET) {
         return {
             ...state,
             detailGame: {},
-            //searchAllGames: [],
         }
     }
-    //-----con la PRIMERA ----
-    /* if (action.type === FILTER_AND_ORDER) {
+    if (action.type === GET_ALL_PLATFORMS) {
         return {
             ...state,
-            processGames: action.payload
+            platformsGames: action.payload
         }
-    } */
-
-    // -------con la SEGUNDA---
+    }
     if (action.type === ORDER_GAMES) {
         return {
             ...state,
@@ -73,20 +80,6 @@ export function rootReducer(state = initialState, action) {
             processGames: action.payload
         }
     }
-
-    //------- Con la tercer forma HARDCODEADO -------- FUNCIONA
-    /* if (action.type === HARDCO) {
-        return {
-            ...state,
-            //processGames: state.processGames.sort((a, b) => {return b.rating - a.rating})
-            processGames:  state.processGames.sort((a, b) => {
-                if (a.name > b.name) {
-                    return 1
-                } else return -1
-            }) 
-        }
-    } */
-
 
     return state;
 }

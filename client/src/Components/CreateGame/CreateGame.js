@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
-//import { NavLink } from 'react-router-dom';
-//import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { addNewGame, getGenres, getPlatforms } from '../../Actions/actions.js';
 
+import style from './CreateGame.module.css';
 import imgDefault from '../../images/imgDefault.png';
-
 
 export default function CreateGame() {
     const [input, setInput] = useState(
@@ -20,7 +18,6 @@ export default function CreateGame() {
     });
 
     const dispatch = useDispatch();
-    //const allVideoGames = useSelector(state => state.searchGames);
     const allGenres = useSelector(state => state.genresGames);
     const allGamesProcess = useSelector(state => state.processGames);
     const allPlatforms = useSelector(state => state.platformsGames);
@@ -40,8 +37,7 @@ export default function CreateGame() {
         if (name === 'AddGenres') {
             if (!input.genres.includes(value)) {
                 setInput({...input, genres: [...input.genres].concat(value)})
-                /* setInput({...input, genres: [...input.genres].concat({
-                    id: value, name: gerName})}) */
+               
             } else {
                 setInput({...input, genres: [...input.genres].filter(g => g !== value)})
             }
@@ -94,65 +90,75 @@ export default function CreateGame() {
     }
     
     return(
-        <form onSubmit={handdleSubmit}>
-            <div>
-                <label>Platforms</label>
-                <select name='AddPlatforms' onChange={handdleInputChange} size='5' multiple>
-                    {allPlatforms.map(plat => (
-                        <option key={plat.id} value={plat.name}>{plat.name}</option>
-                    ))}
-                </select>
-                <textarea placeholder='Selected Platforms' value={input.platforms}> </textarea>
-            </div>
-
-        <div>
-                <label>Genres</label>
-                <select name='AddGenres' onChange={handdleInputChange} size='5' multiple>
-                       {/*  <option selected value='None'>-Select Genres</option> */}
-                    {allGenres.map(g => (
-                        <option key={g.id} value={g.id}>{g.name}</option>
-                    ))}
-                </select>
-                <textarea placeholder='Selected Genres' value={input.genres}> </textarea>
-        </div>
-        <img />
-        <div>
-            <label>Name</label>
+    <form onSubmit={handdleSubmit} className={style.formGral}>
+ 
+        <div className={style.divs}>
+            <label className={style.label}>Name</label>
             <input  name='name' type='text' 
                     value={input.name} onChange={handdleInputChange}
-                    autoComplete='off' />
+                    autoComplete='off' clasName={style.gral_divs}
+                    className={style.text_inputs}
+                    />
         </div>
-        <div>
-            <label>Description</label>
+
+        <div className={style.divs}>
+            <label className={style.label}>Description</label>
             <textarea   name='description' type='text' 
-                        value={input.description} onChange={handdleInputChange}>
+                        value={input.description} onChange={handdleInputChange}
+                        className={style.text_tarea}>
             </textarea>
         </div>
+
+        <div className={style.divs}>
+            <label className={style.label}>Genres</label>
+            <select name='AddGenres' onChange={handdleInputChange} 
+                    className={style.select_mult} size='5' multiple>
+
+                        {allGenres.map(g => (
+                         <option key={g.id} value={g.id}>{g.name}</option>
+                        ))}
+            </select>
+            <textarea   placeholder='Selected Genres' value={input.genres}
+                        className={style.select_text_tarea}> </textarea>
+        </div>
        
-        <div>
-            <label>Released</label>
+        <div className={style.divs}>
+            <label className={style.label}>Released</label>
             <input  name='released' type='date' 
                     value={input.released} onChange={handdleInputChange} 
                     autoComplete='off'
                     />
         </div>
-        <div>
-            <label>Rating</label>
+
+        <div className={style.divs}>
+            <label className={style.label}>Rating</label>
             <input  name='rating' type='text' 
                     value={input.rating} onChange={handdleInputChange} 
                     autoComplete='off' placeholder='add Rating'
-                    />
+                    className={style.text_inputs}/>
         </div>
-        
+
+        <div className={style.divs}>
+            <label className={style.label}>Platforms</label>
+            <select name='AddPlatforms' onChange={handdleInputChange} 
+                    className={style.select_mult} size='5' multiple>
+
+                        {allPlatforms.map(plat => (
+                            <option key={plat.id} value={plat.name}>{plat.name}</option>
+                        ))}
+            </select>
+            <textarea   placeholder='Selected Platforms' value={input.platforms}
+                        className={style.select_text_tarea}> </textarea>
+        </div>
        
-        <input type='submit' value='Add Game' onSubmit={handdleSubmit} />
-        </form>
+        <input  type='submit' value='Add Game' onSubmit={handdleSubmit} 
+                className={style.btn_crea}/>
+
+    </form>
     )
 }
 
 
 /* 
-    handleInputChange(event) {
-    const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name; */
+size='5' multiple
+*/

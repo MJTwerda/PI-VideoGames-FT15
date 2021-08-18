@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch } from "react-redux";
-import { getVideogamesByName, getAllGames, getGenres } from '../../Actions/actions.js';
+import { getVideogamesByName, getAllGames, getGenres, MyGames } from '../../Actions/actions.js';
+
+import style from './SearchGames.module.css';
 
 export default function SearchGames() {
 
@@ -24,17 +26,32 @@ export default function SearchGames() {
             setName('');
     }
 
+    function handdleSubmitMyGames(e) {
+        e.preventDefault();
+        dispatch(MyGames());
+    }
+
     return(
-        <div>
-        <form onSubmit={handdleSubmit}>
-            <input type='text' value={name} placeholder='Search videogames' onChange={onChange} />
-            <input  type='submit' name='ByName'  
-                    value='By Name' onSubmit={handdleSubmit} />
-        </form>
-        <form onSubmit={handdleSubmitAllGames}>
-            <input  type='submit' name='All' 
-                    value='All Games' onSubmit={handdleSubmitAllGames} />
-        </form>
+        <div className={style.gral}>
+            <form onSubmit={handdleSubmit} className={style.Form_text_submit}>
+
+                <input  type='text' value={name} placeholder='Search videogames' 
+                        onChange={onChange} className={style.inputText}/>
+
+                <input  type='submit' name='ByName'  className={style.btnSearch}
+                        value='By Name' onSubmit={handdleSubmit} />
+            </form>
+
+            <form onSubmit={handdleSubmitAllGames} className={style.Form_btn_Allgames}>
+            
+                <input  type='submit' name='All' className={style.btnSearch}
+                        value='All Games' onSubmit={handdleSubmitAllGames} />
+            </form>
+
+            <form onSubmit={handdleSubmitMyGames} className={style.Form_btn_Allgames}>
+                <input  type='submit'  name='MyGames' className={style.btnSearch}
+                        value='My Games' onSubmit={handdleSubmitMyGames}/>
+            </form>
         
         </div>
     )
