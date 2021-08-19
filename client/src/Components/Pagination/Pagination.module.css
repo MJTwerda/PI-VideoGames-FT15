@@ -27,6 +27,9 @@
     -webkit-transform:scale(1.2);
     transform:scale(1.2);
 }
+.btnInd:focus {
+    box-shadow: 0 0 0 2px rgb(223, 173, 138), 0 0 0 4px rgb(245, 126, 41);
+}
 
 .direction {
     display: flex;

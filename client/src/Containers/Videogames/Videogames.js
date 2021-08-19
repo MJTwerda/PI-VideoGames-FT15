@@ -75,10 +75,9 @@ export default function Videogames() {
                     next={paginateButtonNext}
                     numPag={currentPage}
                 />
-        </div>
-
-        <h5 className={style.numPage}>Page {currentPage}</h5>
-           
+            </div>           
         </div>
      )
-}
+    }
+    
+    {/*  <h5 className={style.numPage}>Page {currentPage}</h5> */}

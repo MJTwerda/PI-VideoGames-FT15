@@ -29,7 +29,6 @@
     width: 350px;
     height: 250px;
     border-radius: 20px; 
-    /* box-shadow: 0 0 8px 8px white inset; */
 }
 .poster:hover {
     filter: saturate(180%);

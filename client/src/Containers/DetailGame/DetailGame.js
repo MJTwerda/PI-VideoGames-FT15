@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { getDetailGame } from '../../Actions/actions.js';
-
 import {useSelector, useDispatch} from 'react-redux';
+
+import style from './DetailGame.module.css';
 
 export default function DetailGame(props) {
 
@@ -17,76 +18,43 @@ export default function DetailGame(props) {
     }
     
     return ( 
-       <div>
-        <h4>{detailGame.name}</h4>
-        <img src={detailGame.image} width='400' height='250' alt='Not Found'/>
+        <>
+
+        <div className={style.cont_img}>
+            <img src={detailGame.image} className={style.img} alt='Not Found'/>
+        </div>
+       <div className={style.container}>
+
+        <h4 className={style.title}>{detailGame.name}</h4>
+        
+        <div className={style.cont_items}>
         {detailGame.platforms?.map(plat => {
             if (typeof plat === 'string') {
-                return (<p>{plat}</p>)
+                return (<p className={style.item}>{plat}</p>)
             } else {
           return (
-           <p>{plat.name}, </p>
-          )
-            }
-        })}
-        <h4>Release: {detailGame.released}</h4>
-        <p>{detailGame.description}</p>
-        <h5>Rating: {detailGame.rating}</h5>
-        <ul>{detailGame.Genres?.map(gen => {
-            return (
-                <li>{gen.name}</li>
-            )
-        })}
-        </ul>
+           <p className={style.item}>{plat.name} </p>
+          )}
+          })}
+        </div>
 
+        <h4 className={style.title}>Release: {detailGame.released}</h4>
+
+        <p className={style.description}>{detailGame.description}</p>
+
+        <h5 className={style.description}>Rating: {detailGame.rating}</h5>
+
+        <div className={style.cont_items}>
+            {detailGame.Genres?.map(gen => {
+                return (
+                    <p className={style.item}>{gen.name}</p>
+                )}
+            )}
+            
+        </div>
 
        </div>
+       </>
     )
 }
-    /* function mapDispatchToProps(dispatch) {
-        return {
-           getDetails: gameId => dispatch(getDetailGame(gameId)),
-        }
-    }
-
-    function mapStateToProps(state) {
-        return {
-            detail: state.detailGame
-        }
-    }
-
-export default connect(mapStateToProps, mapDispatchToProps)(DetailGame);  */
-
-
-//key={detailGame.Genre.id}
-
-
-/* 
- <div key={detailGame.id}>
-            {<h3>DETALLES DEL GAME</h3>}
-            <h2>{detailGame.name}</h2>
-
-            <h4>Released: {detailGame.released}</h4>
-            
-            {<ul>
-            {detailGame.Genres.map(genre => {
-                    <li key={genre.id}>{genre.name}</li>
-            })}
-            </ul>  
-            <img src={detailGame.image} width='400' height='250' alt='Search'/>}
-
-             <p>{detailGame.description}</p>
-
-             {<ul>
-            {detailGame.platforms.map(plat => {
-                return  (
-                    <p key={plat.id}>
-                        {plat.name}
-                    </p>
-                )
-            })}
-            </ul>}
-            <h4>Rating: </h4>
-            {<h4>Rating: {detailGame.rating}</h4>}
-        </div>
-*/
+    
