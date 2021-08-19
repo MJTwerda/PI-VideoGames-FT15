@@ -30,9 +30,7 @@ export default function CreateGame() {
     function handdleInputChange(e) {
         let name = e.target.name;
         let value = e.target.value;
-        let gerName = value[0].toUpperCase() + value.slice(1);
-        console.log('valor que llega en genre: ', value);
-        console.log('gerName: ', gerName)
+        //let gerName = value[0].toUpperCase() + value.slice(1);
 
         if (name === 'AddGenres') {
             if (!input.genres.includes(value)) {
@@ -157,8 +155,3 @@ export default function CreateGame() {
     </form>
     )
 }
-
-
-/* 
-size='5' multiple
-*/
