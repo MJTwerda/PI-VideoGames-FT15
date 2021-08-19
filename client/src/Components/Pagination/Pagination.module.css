@@ -1,15 +1,16 @@
+.totalPag {
+    padding: 5px;
+    display: table-column;
+    justify-content: center;
+    margin-top: 40px;
+}
+
 .btnPag {
     display: inline-block;
     padding: 7px;
-    /* border:solid;
-    border-radius: 20px;   */ 
-}
-.btnPag:hover {
-    
 }
 
 .btnInd {
-    /* opacity: 70%; */
     background: linear-gradient(45deg, rgb(235, 203, 117), rgb(156, 117, 11));
     border-radius: 20px;  
     border: groove #767776;
@@ -23,13 +24,8 @@
 .btnInd:hover {
     background-color: rgb(223, 173, 138);
     border-color: rgb(73, 74, 75);
-    
-}
-
-.totalPag {
-    padding: 5px;
-    display: table-column;
-    justify-content: center;
+    -webkit-transform:scale(1.2);
+    transform:scale(1.2);
 }
 
 .direction {
@@ -52,4 +48,6 @@
 .btnDirec:hover {
     background-color: rgb(223, 173, 138);
     border-color: rgb(73, 74, 75);
+    -webkit-transform:scale(1.2);
+    transform:scale(1.2);
 }
